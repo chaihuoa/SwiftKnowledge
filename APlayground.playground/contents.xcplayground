@@ -16,5 +16,7 @@
         <page name='Singleton'/>
         <page name='Composition'/>
         <page name='JSON'/>
+        <page name='Dispatch'/>
+        <page name='Untitled Page'/>
     </pages>
 </playground>
