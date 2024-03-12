@@ -17,6 +17,7 @@
         <page name='Composition'/>
         <page name='JSON'/>
         <page name='Dispatch'/>
+        <page name='Struct'/>
         <page name='Untitled Page'/>
     </pages>
 </playground>
