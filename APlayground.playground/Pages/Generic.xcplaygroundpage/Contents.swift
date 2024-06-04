@@ -2,6 +2,65 @@
 
 import Foundation
 
+// 类型擦除
+// 不同的泛型类型实例封装成了统一的类型，并存储在同一个数组中
+
+protocol Identifiable {
+    associatedtype Identifier
+    var id: Identifier { get }
+}
+
+struct User: Identifiable {
+    var id: String
+}
+
+struct Product: Identifiable {
+    var id: String
+}
+
+let user = User(id: "user123")
+let product = Product(id: "product456")
+
+// 下面这行代码将会报错
+// let tmp = [user, product]
+
+// Heterogeneous collection literal could only be inferred to '[Any]'; add explicit type annotation if this is intentional
+// Insert ' as [Any]'
+// let tmp = [user, product] as [Any]
+
+class AnyIdentifiable {
+    private let _getId: () -> Any
+
+    var id: Any {
+        return _getId()
+    }
+
+    init<T: Identifiable>(_ identifiable: T) {
+        self._getId = { identifiable.id }
+    }
+}
+
+struct Employee: Identifiable {
+    var id: Int
+}
+
+let employee = Employee(id: 123)
+let anyIdentifiableEmployee = AnyIdentifiable(employee)
+
+let anyIdentifiableUser = AnyIdentifiable(user)
+let anyIdentifiableProduct = AnyIdentifiable(product)
+
+var identifiableItems: [AnyIdentifiable] = []
+identifiableItems.append(anyIdentifiableUser)
+identifiableItems.append(anyIdentifiableProduct)
+identifiableItems.append(anyIdentifiableEmployee)
+
+for item in identifiableItems {
+    print(item.id) // 可能输出String或Int类型的id
+}
+
+
+
 protocol Vehicle {
 
     associatedtype FuelType

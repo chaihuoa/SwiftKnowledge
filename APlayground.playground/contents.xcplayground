@@ -19,5 +19,7 @@
         <page name='Dispatch'/>
         <page name='Struct'/>
         <page name='Untitled Page'/>
+        <page name='FunctionalPrograming'/>
+        <page name='Runloop'/>
     </pages>
 </playground>
